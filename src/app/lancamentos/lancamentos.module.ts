@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from '../app-routing.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -29,7 +29,6 @@ import { SharedModule } from './../shared/shared.module';
   imports: [
     BrowserAnimationsModule,
     FormsModule,
-    AppRoutingModule,
     InputTextModule,
     ButtonModule,
     TableModule,
@@ -41,11 +40,8 @@ import { SharedModule } from './../shared/shared.module';
     NgxCurrencyModule,
     CommonModule,
 
-    SharedModule
-  ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ],
+    SharedModule,
+    LancamentosRoutingModule
+  ]
 })
 export class LancamentosModule { }

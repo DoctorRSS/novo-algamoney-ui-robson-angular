@@ -1,68 +1,74 @@
 <div class="container">
-  <form #f="ngForm" autocomplete="off">
+ <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+ <!--  <form #f="ngForm" autocomplete="off"> -->
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo Lançamento</h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Lançamento</h1>
       </div>
 
       <div class="ui-g-12">
-        <p-selectButton name="tipo" [options]="tipos" #tipo ngModel></p-selectButton>
+        <p-selectButton name="tipo" [options]="tipos" #tipo [(ngModel)]="lancamento.tipo"></p-selectButton>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>Vencimento</label>
         <p-calendar name="vencimento" dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
-        [showIcon]="false" ngModel #vencimento="ngModel" required></p-calendar>
+        [showIcon]="false" [(ngModel)]="lancamento.dataVencimento" #vencimento="ngModel" required></p-calendar>
 
-       <!-- <app-message [control]="vencimento" error="required"
-        text="Informe uma data de vencimento"></app-message> -->
+       <app-message [control]="vencimento" error="required"
+        text="Informe uma data de vencimento"></app-message>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
         <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false"
-        [showIcon]="false"></p-calendar>
+        [showIcon]="false" [(ngModel)]="lancamento.dataPagamento" name="dataPagamento"></p-calendar>
       </div>
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Descrição</label>
         <input pInputText type="text" name="descricao"
-        ngModel #descricao="ngModel" required minlength="5">
+        [(ngModel)]="lancamento.descricao" #descricao="ngModel" required minlength="5">
 
-      <!--  <app-message [control]="descricao" error="required"
+       <app-message [control]="descricao" error="required"
         text="Informe uma descrição"></app-message>
         <app-message [control]="descricao" error="minlength"
-        text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message> -->
+        text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
 
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Valor</label>
-        <input pInputText type="text" placeholder="0,00" name="valor"
-        [options]="{ prefix: '', thousands: '.', decimal: ',' }" currencyMask ngModel required>
+        <input pInputText type="text" placeholder="0,00" name="valor" #valor="ngModel"
+        [options]="{ prefix: '', thousands: '.', decimal: ',' }" currencyMask
+        [(ngModel)]="lancamento.valor" required>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria</label>
-        <p-dropdown name="categoria" [options]="categorias" placeholder="Selecione"
-        ngModel required></p-dropdown>
+        <p-dropdown name="categoria"
+        [options]="categorias" placeholder="Selecione" [filter]="true"
+        [(ngModel)]="lancamento.categoria.codigo" required></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Pessoa</label>
-        <p-dropdown name="pessoa" [options]="pessoas" placeholder="Selecione" [filter]="true"
-        ngModel required></p-dropdown>
+        <p-dropdown name="pessoa" [options]="pessoas"
+         placeholder="Selecione" [filter]="true"
+        [(ngModel)]="lancamento.pessoa.codigo" required></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-fluid">
         <label>Observação</label>
-        <textarea pInputTextarea rows="3"></textarea>
+        <textarea pInputTextarea rows="3" [(ngModel)]="lancamento.observacao"
+        name="observacao" #observacao="ngModel"></textarea>
       </div>
 
       <div class="ui-g-12">
         <button class="ui-button" pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
-        <button class="ui-button" pButton type="button" label="Novo" class="ui-button-info"></button>
-        <a href="#">Voltar para a pesquisa</a>
+        <button class="ui-button" pButton type="button" label="Novo" class="ui-button-info"
+        (click)="novo(f)"></button>
+        <a [routerLink]="['/lancamentos']">Voltar para a pesquisa</a>
       </div>
 
     </div>

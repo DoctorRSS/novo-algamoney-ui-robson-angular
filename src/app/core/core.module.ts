@@ -1,3 +1,10 @@
+import { AuthService } from './../seguranca/auth.service';
+import { Title } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { CategoriaService } from './../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
@@ -8,15 +15,17 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
+
 
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
   imports: [
     CommonModule,
+    RouterModule,
 
     ConfirmDialogModule,
     ToastyModule.forRoot(),
@@ -29,7 +38,10 @@ import { CommonModule } from '@angular/common';
     ErrorHandlerService,
     LancamentoService,
     PessoaService,
+    CategoriaService,
+    AuthService,
     ConfirmationService,
+    Title,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
 })
