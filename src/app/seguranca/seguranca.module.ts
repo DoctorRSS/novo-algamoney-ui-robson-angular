@@ -35,9 +35,9 @@ export function tokenGetter(): string {
     .forRoot({
       config: {
         //tokenGetter,
-        tokenGetter: (tokenGetter),
-        whitelistedDomains: ['localhost:8080'],
-        blacklistedRoutes: ['http://localhost:8080/oauth/token']
+        tokenGetter: tokenGetter,
+       // whitelistedDomains: ['localhost:8080'],
+        //blacklistedRoutes: ['http://localhost:8080/oauth/token']
       }
   })
   ,
