@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -27,8 +27,9 @@ import { SharedModule } from './../shared/shared.module';
     LancamentosPesquisaComponent
   ],
   imports: [
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
     TableModule,

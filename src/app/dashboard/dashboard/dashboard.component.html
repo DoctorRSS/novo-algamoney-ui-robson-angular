@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Dashboard</h1>
+    </div>
+    <div class="ui-g-12 ui-md-6"></div>
+    <p-panel header="Lançamentos por categoria">
+      <pchart type="pie" [data]="pieChartData"></pchart>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-6"></div>
+    <p-panel header="Lançamentos por dia">
+      <pchart type="line" [data]="lineChartData"></pchart>
+    </p-panel>
+  </div>
+</div>

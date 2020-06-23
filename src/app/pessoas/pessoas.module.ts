@@ -1,4 +1,4 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,7 +23,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     PessoasPesquisaComponent
   ],
   imports: [
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     InputTextModule,
