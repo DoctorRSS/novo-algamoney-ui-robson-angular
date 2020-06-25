@@ -1,4 +1,3 @@
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,16 +13,19 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputMaskModule } from 'primeng/inputmask';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 
 
 @NgModule({
   declarations: [
     PessoaCadastroComponent,
-    PessoasPesquisaComponent
+    PessoasPesquisaComponent,
+    PessoaCadastroContatoComponent
   ],
   imports: [
-    //BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     InputTextModule,
@@ -31,6 +33,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     TableModule,
     TooltipModule,
     InputMaskModule,
+    PanelModule,
+    DialogModule,
 
     SharedModule,
     PessoasRoutingModule,

@@ -1,10 +1,10 @@
 import { Title } from '@angular/platform-browser';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { Pessoa } from './../../core/model';
+import { Pessoa, Contato } from './../../core/model';
 import { PessoaService } from './../pessoa.service';
 
 import { ToastyService } from 'ng2-toasty';

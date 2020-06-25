@@ -1,4 +1,3 @@
-
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +15,7 @@ import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
+import { RelatoriosService } from './../relatorios/relatorios.service';
 import { DashboardService } from './../dashboard/dashboard.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
@@ -47,6 +47,7 @@ registerLocaleData(localePt);
     PessoaService,
     CategoriaService,
     DashboardService,
+    RelatoriosService,
     ErrorHandlerService,
     AuthService,
 

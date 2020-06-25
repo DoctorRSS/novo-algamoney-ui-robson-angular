@@ -15,6 +15,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { NgxCurrencyModule } from 'ngx-currency';
 
@@ -28,6 +30,7 @@ import { SharedModule } from './../shared/shared.module';
   ],
   imports: [
     //BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
@@ -39,7 +42,8 @@ import { SharedModule } from './../shared/shared.module';
     SelectButtonModule,
     DropdownModule,
     NgxCurrencyModule,
-    CommonModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     LancamentosRoutingModule
