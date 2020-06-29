@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MessageService } from 'primeng/api';
+
 import { LancamentoService } from './../lancamento.service';
 import { Lancamento } from './../../core/model';
 import { PessoaService } from './../../pessoas/pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
-
-import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -33,7 +33,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -44,9 +44,10 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
 
     this.configurarFormulario();
-    this.title.setTitle('Novo Lançamento');
 
     const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    this.title.setTitle('Novo Lançamento');
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
@@ -57,7 +58,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   antesUploadAnexo(event) {
-  // event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+   event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
    this.uploadEmAndamento = true;
   }
@@ -73,7 +74,7 @@ export class LancamentoCadastroComponent implements OnInit {
 }
 
 erroUpload(event) {
-  this.toasty.error('Erro ao tentar enviar anexo!');
+  this.messageService.add({ severity: 'error', detail: 'Erro ao tentar enviar anexo!' });
   this.uploadEmAndamento = false;
 }
 
@@ -173,7 +174,7 @@ get nomeAnexo() {
    adicionarLancamento() {
     this.lancamentoService.adicionar(this.formulario.value)
     .then(lancamentoAdicionado => {
-      this.toasty.success('Lancamento adicionado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' });
 
       this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
     })
@@ -186,7 +187,7 @@ get nomeAnexo() {
       //this.lancamento = lancamento;
       this.formulario.patchValue(lancamento);
 
-      this.toasty.success('Lancamento Atualizado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' });
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro));

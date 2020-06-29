@@ -13,11 +13,9 @@ export class AuthService {
 
   oauthTokenUrl: string;
   public jwtPayload: any;
-  public jwtHelper: JwtHelperService = new JwtHelperService();
+  public jwtHelper: JwtHelperService;
 
-  constructor(private http: HttpClient
-              //private jwtHelper: JwtHelperService
-              ) {
+  constructor(private http: HttpClient) {
   this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
   this.carregarToken();
 
@@ -38,8 +36,8 @@ export class AuthService {
     .catch(response => {
       const responseError = response.error;
       if (response.status === 400) {
-      if (responseError.error === 'invalid_grant') {
-        return Promise.reject('Usuário ou senha inválida');
+      if (responseError.error.error === 'invalid_grant') {
+        return Promise.reject('Usuário ou senha inválida!');
       }
     }
       return Promise.reject(response);
@@ -105,30 +103,4 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
-}
-
-@Injectable()
-export class MoneyHttpInterceptor {
-
-    constructor(private auth: AuthService) {}
-}
-
-@Injectable()
-export class LogoutService {
-
-  //tokensRevokeUrl = 'http://localhost:8080/tokens/revoke';
-  tokensRevokeUrl: string;
-    constructor(
-      private http: HttpClient,
-      private auth: AuthService) {
-        this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
-      }
-
-      logout() {
-        return this.http.delete(this.tokensRevokeUrl, {withCredentials: true })
-        .toPromise()
-        .then(() => {
-          this.auth.limparAccessToken();
-        });
-      }
 }

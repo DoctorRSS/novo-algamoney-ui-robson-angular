@@ -1,16 +1,17 @@
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastyModule } from 'ng2-toasty';
+import { ToastModule } from 'primeng/toast';
 
 import { AuthService } from './../seguranca/auth.service';
+import { MoneyHttpInterceptor } from './../seguranca/money-http-interceptor';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
@@ -26,10 +27,10 @@ registerLocaleData(localePt);
 @NgModule({
   imports: [
     CommonModule,
-    HttpClient,
+    HttpClientModule,
     RouterModule,
 
-    ToastyModule.forRoot(),
+    ToastModule,
     ConfirmDialogModule,
   ],
   declarations: [
@@ -39,7 +40,7 @@ registerLocaleData(localePt);
   ],
   exports: [
     NavbarComponent,
-    ToastyModule,
+    ToastModule,
     ConfirmDialogModule
   ],
   providers: [
@@ -50,9 +51,11 @@ registerLocaleData(localePt);
     RelatoriosService,
     ErrorHandlerService,
     AuthService,
+    MoneyHttpInterceptor,
+    MessageService,
 
     ConfirmationService,
-    JwtModule,
+    JwtHelperService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]

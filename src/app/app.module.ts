@@ -11,14 +11,12 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing.module';
-import { PessoaCadastroContatoComponent } from './pessoa/pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PessoaCadastroContatoComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

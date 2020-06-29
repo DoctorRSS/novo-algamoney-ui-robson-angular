@@ -14,10 +14,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
+    PanelModule,
+    ChartModule,
     SharedModule,
     DashboardRoutingModule,
-    PanelModule,
-    ChartModule
   ],
   providers: [DecimalPipe]
 })

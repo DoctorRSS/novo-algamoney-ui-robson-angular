@@ -1,13 +1,13 @@
 import { Title } from '@angular/platform-browser';
-import { NgForm, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { MessageService } from 'primeng/api';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Pessoa, Contato } from './../../core/model';
 import { PessoaService } from './../pessoa.service';
-
-import { ToastyService } from 'ng2-toasty';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   constructor(
     private pessoaService: PessoaService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -77,7 +77,7 @@ export class PessoaCadastroComponent implements OnInit {
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: NgForm) {
+  salvar(form: FormControl) {
     if (this.editando) {
       this.atualizarPessoa(form);
     } else {
@@ -85,29 +85,31 @@ export class PessoaCadastroComponent implements OnInit {
     }
   }
 
-  //salvar(form: FormControl) {
-    adicionarPessoa(form: NgForm) {
+  adicionarPessoa(form: FormControl) {
+  //  adicionarPessoa(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
       .then(pessoaAdicionada => {
-        this.toasty.success('Pessoa adicionada com sucesso!');
+        this.messageService.add({ severity: 'success', detail: 'Pessoa adicionada com sucesso!' });
 
         this.router.navigate(['/pessoas', pessoaAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarPessoa(form: NgForm) {
+  //atualizarPessoa(form: NgForm) {
+    atualizarPessoa(form: FormControl) {
     this.pessoaService.atualizar(this.pessoa)
     .then(pessoa => {
       this.pessoa = pessoa;
 
-      this.toasty.success('Pessoa Atualizada com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Pessoa alterada com sucesso!' });
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  novo(form: NgForm) {
+  //novo(form: NgForm) {
+    novo(form: FormControl) {
     form.reset();
     setTimeout(function() {
       this.pessoa = new Pessoa();

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Pessoa, Estado, Cidade } from './../core/model';
 import { environment } from './../../environments/environment';
@@ -31,11 +31,11 @@ export class PessoaService {
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     let params = new HttpParams();
 
-    params = params.set('page', filtro.pagina.toString());
-    params = params.set('size', filtro.itensPorPagina.toString());
+    params = params.append('page', filtro.pagina.toString());
+    params = params.append('size', filtro.itensPorPagina.toString());
 
     if (filtro.nome) {
-      params = params.set('nome', filtro.nome);
+      params = params.append('nome', filtro.nome);
     }
 
     return this.http.get(`${this.pessoasUrl}`,
@@ -58,8 +58,10 @@ export class PessoaService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo)
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, {headers})
     .toPromise().then(() => null);
   }
 
@@ -108,7 +110,7 @@ export class PessoaService {
 
     pesquisarCidades(estado): Promise<Cidade[]> {
       let params = new HttpParams();
-      params = params.set('estado', estado);
+      params = params.append('estado', estado);
       return this.http.get(this.cidadesUrl, { params})
           .toPromise()
           .then(response => response as Cidade[]);

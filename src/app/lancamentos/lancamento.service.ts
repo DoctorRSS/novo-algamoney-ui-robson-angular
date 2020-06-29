@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+
+import * as moment from 'moment';
 
 import { environment } from './../../environments/environment';
 import { Lancamento } from './../core/model';
-
-import 'rxjs/add/operator/toPromise';
-import * as moment from 'moment';
+import { MoneyHttpInterceptor } from './../seguranca/money-http-interceptor';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -22,7 +22,7 @@ export class LancamentoService {
 
   lancamentosUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: MoneyHttpInterceptor) {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
@@ -33,31 +33,33 @@ export class LancamentoService {
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
     let params = new HttpParams();
 
-    params = params.set('page', filtro.pagina.toString());
-    params = params.set('size', filtro.itensPorPagina.toString());
+    params = params.append('page', filtro.pagina.toString());
+    params = params.append('size', filtro.itensPorPagina.toString());
 
     if (filtro.descricao) {
-      params = params.set('descricao', filtro.descricao);
+      params = params.append('descricao', filtro.descricao);
     }
 
     if (filtro.dataVencimentoInicio) {
-      params = params.set('dataVencimentoDe',
+      params = params.append('dataVencimentoDe',
       moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
     }
 
     if (filtro.dataVencimentoFim) {
-      params = params.set('dataVencimentoAte',
+      params = params.append('dataVencimentoAte',
       moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`,
+    return this.http.get<any>(`${this.lancamentosUrl}?resumo`,
     { params })
     .toPromise()
     .then(response => {
-      const lancamentos = response['content']
+     // const lancamentos = response['content']
+      const lancamentos = response.content;
       const resultado = {
         lancamentos,
-        total: response['totalElements']
+       // total: response['totalElements']
+       total: response.totalElements
       };
       return resultado;
     });
@@ -83,8 +85,8 @@ export class LancamentoService {
       `${this.lancamentosUrl}/${lancamento.codigo}`, lancamento)
       .toPromise()
       .then(response => {
-        const lancamentoAlterado = response as Lancamento;
-
+       // const lancamentoAlterado = response as Lancamento;
+        const lancamentoAlterado = response;
         this.converterStringsParaDatas([lancamentoAlterado]);
 
         return lancamentoAlterado;
@@ -93,10 +95,12 @@ export class LancamentoService {
 
   buscarPorCodigo(codigo: number): Promise<Lancamento> {
 
-    return this.http.get(`${this.lancamentosUrl}/${codigo}`)
+    //return this.http.get(`${this.lancamentosUrl}/${codigo}`)
+    return this.http.get<Lancamento>(`${this.lancamentosUrl}/${codigo}`)
     .toPromise()
     .then(response => {
-      const lancamento = response as Lancamento;
+      //const lancamento = response as Lancamento;
+      const lancamento = response;
       this.converterStringsParaDatas([lancamento]);
       return lancamento;
     });

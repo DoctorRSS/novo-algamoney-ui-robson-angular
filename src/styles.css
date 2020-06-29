@@ -5,21 +5,30 @@ body {
   color: #404C51;
 }
 
-.ui-button{
-  margin-right: 10px !important;
-}
-
-p-selectButton {
-  margin-right: 0 !important;
-}
-
 label{
   font-weight: bold;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+a.ui-button:hover {
+  background-color: #005b9f;
+  color: white !important;
 }
 
 a {
   color:#337ab7;
   text-decoration: none;
+}
+
+a, button {
+  margin-right: .25em
+}
+
+label {
+  font-weight: bold;
 }
 
 @media (min-width: 1200px){
@@ -49,3 +58,20 @@ a {
   text-align: center;
 }
 
+.col-acoes .ui-button {
+  margin: 1px;
+}
+
+.label-spaced {
+  margin: 5px;
+}
+
+.cadastro-acoes .ui-button {
+  margin-right: 5px;
+}
+
+.relatorio-filtro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
