@@ -1,4 +1,4 @@
-import { Component, OnInit, ErrorHandler } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from './../auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from './../auth.service';
 })
 export class LoginFormComponent {
 
-  constructor(private auth: AuthService,
+  constructor(public auth: AuthService,
               private errorHandler: ErrorHandlerService,
               private router: Router) { }
 

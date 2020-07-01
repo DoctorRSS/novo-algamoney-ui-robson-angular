@@ -1,12 +1,16 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
+import { HttpHandler, HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { mergeMap } from 'rxjs/operators';
 import { Observable, from as observableFromPromise } from 'rxjs';
 
 export class NotAuthenticatedError {}
 
 @Injectable()
+@NgModule({
+  declarations: [],
+  imports: [],
+  providers: []
+})
 export class MoneyHttpInterceptor extends HttpClient {
 
     constructor(

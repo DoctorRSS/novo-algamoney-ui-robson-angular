@@ -1,5 +1,5 @@
 import { Title } from '@angular/platform-browser';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -77,7 +77,8 @@ export class PessoaCadastroComponent implements OnInit {
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: FormControl) {
+  salvar(form: NgForm) {
+  //salvar(form: FormControl) {
     if (this.editando) {
       this.atualizarPessoa(form);
     } else {
@@ -85,8 +86,8 @@ export class PessoaCadastroComponent implements OnInit {
     }
   }
 
-  adicionarPessoa(form: FormControl) {
-  //  adicionarPessoa(form: NgForm) {
+  //adicionarPessoa(form: FormControl) {
+    adicionarPessoa(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
       .then(pessoaAdicionada => {
         this.messageService.add({ severity: 'success', detail: 'Pessoa adicionada com sucesso!' });
@@ -96,8 +97,8 @@ export class PessoaCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  //atualizarPessoa(form: NgForm) {
-    atualizarPessoa(form: FormControl) {
+  atualizarPessoa(form: NgForm) {
+  //  atualizarPessoa(form: FormControl) {
     this.pessoaService.atualizar(this.pessoa)
     .then(pessoa => {
       this.pessoa = pessoa;
@@ -108,8 +109,8 @@ export class PessoaCadastroComponent implements OnInit {
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  //novo(form: NgForm) {
-    novo(form: FormControl) {
+  novo(form: NgForm) {
+  //  novo(form: FormControl) {
     form.reset();
     setTimeout(function() {
       this.pessoa = new Pessoa();

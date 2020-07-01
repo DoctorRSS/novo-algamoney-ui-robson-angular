@@ -2,10 +2,8 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -21,14 +19,11 @@ registerLocaleData(localePt);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     CoreModule,
     SegurancaModule,
     AppRoutingModule
   ],
-  providers: [
-
-],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

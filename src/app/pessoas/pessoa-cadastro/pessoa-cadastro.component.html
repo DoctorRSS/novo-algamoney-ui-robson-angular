@@ -67,7 +67,7 @@
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Estado</label>
         <p-dropdown placeholder="Selecione..." [filter]="true"
-         [option]="estados"
+         [options]="estados"
          [(ngModel)]="estadoSelecionado" name="estadoSelecionado"
         (onChange)="carregarCidades()" #estado="ngModel" required> </p-dropdown>
 
@@ -78,7 +78,7 @@
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Cidade</label>
         <p-dropdown placeholder="Selecione..."
-        [option]="cidades" [filter]="true"
+        [options]="cidades" [filter]="true"
         [(ngModel)]="pessoa.endereco.cidade.codigo" name="cidade"
         #cidade="ngModel" required
         [disabled]="!estadoSelecionado"> </p-dropdown>
@@ -91,7 +91,7 @@
 
       <div class="ui-g-12">
         <p-panel header="Contatos">
-          <app-cadastro-pessoa-contato [contatos]="pessoa.contatos"></app-cadastro-pessoa-contato>
+          <app-pessoa-cadastro-contato [contatos]="pessoa.contatos"></app-pessoa-cadastro-contato>
         </p-panel>
       </div>
 
