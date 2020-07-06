@@ -102,8 +102,9 @@ export class PessoaService {
     }
 
     listarEstados(): Promise<Estado[]> {
+    /*  return this.http.get(this.estadosUrl).toPromise()*/
       return this.http.get<Estado[]>(this.estadosUrl).toPromise();
-       /* .then(response => {
+      /*  .then(response => {
           return response['content'];
         });*/
     }
