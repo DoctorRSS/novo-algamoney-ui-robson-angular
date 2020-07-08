@@ -57,8 +57,9 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
-  antesUploadAnexo(event) {
-   event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  antesUploadAnexo() {
+  //antesUploadAnexo(event) {
+   //event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
    this.uploadEmAndamento = true;
   }
