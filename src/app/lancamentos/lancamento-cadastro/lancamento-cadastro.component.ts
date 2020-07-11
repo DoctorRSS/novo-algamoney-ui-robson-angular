@@ -130,7 +130,7 @@ get nomeAnexo() {
 
   validarTamanhoMinimo(valor: number) {
     return (input: FormControl) => {
-      return (!input.value || input.value.lenght >= valor ) ? null : { tamanhoMinimo:  {tamanho: valor} };
+      return (!(input.value) || input.value.length >= valor ) ? null : { tamanhoMinimo:  {tamanho: valor} };
     };
   }
 
