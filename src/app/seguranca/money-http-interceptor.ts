@@ -1,7 +1,8 @@
 import { Injectable, NgModule } from '@angular/core';
-import { HttpHandler, HttpClient } from '@angular/common/http';
+import { HttpHandler, HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Observable, from as observableFromPromise } from 'rxjs';
+import { Observable, from as observableFromPromise, from } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 export class NotAuthenticatedError {}
 
@@ -68,7 +69,7 @@ export class MoneyHttpInterceptor extends HttpClient {
         }
       }
 
- /*   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
       if (!req.url.includes('/oauth/token') && this.auth.isAccessTokenInvalido()) {
 
@@ -89,5 +90,5 @@ export class MoneyHttpInterceptor extends HttpClient {
       }
 
       return next.handle(req);
-  } */
+  }
 }
